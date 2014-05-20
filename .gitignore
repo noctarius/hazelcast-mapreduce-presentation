@@ -1,0 +1,11 @@
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+release.properties
+target/
+*.idea
+.idea/
+.clover/
+atlassian-ide-plugin.xml
+.DS_Store
