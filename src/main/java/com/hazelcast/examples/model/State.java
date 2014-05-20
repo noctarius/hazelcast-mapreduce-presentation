@@ -224,4 +224,27 @@ public class State
         censusDevisionName = in.readUTF();
         circuitCourt = in.readInt();
     }
+
+    @Override
+    public String toString() {
+        return "State{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", abbreviation='" + abbreviation + '\'' +
+                ", country='" + country + '\'' +
+                ", type='" + type + '\'' +
+                ", sort=" + sort +
+                ", status='" + status + '\'' +
+                ", occupied='" + occupied + '\'' +
+                ", notes='" + notes + '\'' +
+                ", fipsState=" + fipsState +
+                ", assocPress='" + assocPress + '\'' +
+                ", standardFederalRegion='" + standardFederalRegion + '\'' +
+                ", censusRegion=" + censusRegion +
+                ", censusRegionName='" + censusRegionName + '\'' +
+                ", censusDivision=" + censusDivision +
+                ", censusDevisionName='" + censusDevisionName + '\'' +
+                ", circuitCourt=" + circuitCourt +
+                '}';
+    }
 }

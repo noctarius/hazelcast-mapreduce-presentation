@@ -21,6 +21,7 @@ import com.hazelcast.config.NetworkConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.examples.csv.ReaderHelper;
+import com.hazelcast.examples.tutorials.*;
 
 import java.util.Arrays;
 
@@ -40,8 +41,9 @@ public class Main {
         // Read CSV data
         ReaderHelper.read(hazelcastInstance);
 
-        //
-
+        // Execute Tutorial
+        Tutorial tutorial = new Tutorial5();
+        tutorial.execute(hazelcastInstance);
 
         // Shutdown cluster
         Hazelcast.shutdownAll();

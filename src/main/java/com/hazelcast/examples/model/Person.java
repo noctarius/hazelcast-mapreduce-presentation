@@ -16,6 +16,7 @@
 
 package com.hazelcast.examples.model;
 
+import com.hazelcast.core.PartitionAware;
 import com.hazelcast.nio.ObjectDataInput;
 import com.hazelcast.nio.ObjectDataOutput;
 import com.hazelcast.nio.serialization.DataSerializable;
@@ -23,7 +24,7 @@ import com.hazelcast.nio.serialization.DataSerializable;
 import java.io.IOException;
 
 public class Person
-        implements DataSerializable {
+        implements DataSerializable, PartitionAware<String> {
 
     private String firstName;
     private String lastName;
@@ -168,5 +169,28 @@ public class Person
         phone2 = in.readUTF();
         email = in.readUTF();
         web = in.readUTF();
+    }
+
+    @Override
+    public String getPartitionKey() {
+        return email;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", county='" + county + '\'' +
+                ", state='" + state + '\'' +
+                ", zip=" + zip +
+                ", phone1='" + phone1 + '\'' +
+                ", phone2='" + phone2 + '\'' +
+                ", email='" + email + '\'' +
+                ", web='" + web + '\'' +
+                '}';
     }
 }

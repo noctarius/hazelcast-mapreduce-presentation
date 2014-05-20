@@ -21,6 +21,7 @@ import com.hazelcast.nio.ObjectDataOutput;
 import com.hazelcast.nio.serialization.DataSerializable;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SalaryYear
@@ -73,10 +74,20 @@ public class SalaryYear
         email = in.readUTF();
         year = in.readInt();
         int length = in.readInt();
+        months = new ArrayList<>(12);
         for (int i = 0; i < length; i++) {
             SalaryMonth salaryMonth = new SalaryMonth();
             salaryMonth.readData(in);
             months.add(salaryMonth);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "SalaryYear{" +
+                "email='" + email + '\'' +
+                ", year=" + year +
+                ", months=" + months +
+                '}';
     }
 }

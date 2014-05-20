@@ -92,4 +92,15 @@ public class Crime
         year = in.readInt();
         count = in.readInt();
     }
+
+    @Override
+    public String toString() {
+        return "Crime{" +
+                "state='" + state + '\'' +
+                ", typeOfCrime=" + typeOfCrime +
+                ", crime=" + crime +
+                ", year=" + year +
+                ", count=" + count +
+                '}';
+    }
 }

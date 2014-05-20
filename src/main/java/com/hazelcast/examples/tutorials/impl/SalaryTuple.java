@@ -14,58 +14,57 @@
  * limitations under the License.
  */
 
-package com.hazelcast.examples.model;
+package com.hazelcast.examples.tutorials.impl;
 
 import com.hazelcast.nio.ObjectDataInput;
 import com.hazelcast.nio.ObjectDataOutput;
 import com.hazelcast.nio.serialization.DataSerializable;
 
 import java.io.IOException;
-import java.time.Month;
 
-public class SalaryMonth
+public class SalaryTuple
         implements DataSerializable {
 
-    private Month month;
-    private int salary;
+    private int count;
+    private int amount;
 
-    public Month getMonth() {
-        return month;
+    public SalaryTuple() {
     }
 
-    public void setMonth(Month month) {
-        this.month = month;
+    public SalaryTuple(int count, int amount) {
+        this.count = count;
+        this.amount = amount;
     }
 
-    public int getSalary() {
-        return salary;
+    public int getCount() {
+        return count;
     }
 
-    public void setSalary(int salary) {
-        this.salary = salary;
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     @Override
     public void writeData(ObjectDataOutput out)
             throws IOException {
 
-        out.writeInt(month.getValue());
-        out.writeInt(salary);
+        out.writeInt(count);
+        out.writeInt(amount);
     }
 
     @Override
     public void readData(ObjectDataInput in)
             throws IOException {
 
-        month = Month.of(in.readInt());
-        salary = in.readInt();
-    }
-
-    @Override
-    public String toString() {
-        return "SalaryMonth{" +
-                "month=" + month +
-                ", salary=" + salary +
-                '}';
+        count = in.readInt();
+        amount = in.readInt();
     }
 }
