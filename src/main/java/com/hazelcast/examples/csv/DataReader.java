@@ -16,70 +16,10 @@
 
 package com.hazelcast.examples.csv;
 
-import org.supercsv.cellprocessor.ParseInt;
-import org.supercsv.cellprocessor.constraint.NotNull;
-import org.supercsv.cellprocessor.ift.CellProcessor;
-import org.supercsv.io.CsvBeanReader;
-import org.supercsv.io.ICsvBeanReader;
-import org.supercsv.prefs.CsvPreference;
-
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
-public abstract class DataReader<T> {
-
-    protected static final CellProcessor INT = new ParseInt();
-    protected static final CellProcessor NOT_NULL = new NotNull();
-
-    private final CellProcessor[] cellProcessors;
-    private final Class<T> type;
-
-    public DataReader(CellProcessor[] cellProcessors, Class<T> type) {
-        this.cellProcessors = cellProcessors;
-        this.type = type;
-    }
-
-    public List<T> read(InputStream is)
-            throws Exception {
-
-        List<T> elements = new ArrayList<>();
-        try (ICsvBeanReader reader = new CsvBeanReader(new InputStreamReader(is), CsvPreference.EXCEL_PREFERENCE)) {
-            String[] headers = mapHeaderNames(reader.getHeader(true));
-
-            T element;
-            while ((element = reader.read(type, headers, cellProcessors)) != null) {
-                elements.add(element);
-            }
-        }
-        return elements;
-    }
-
-    private String[] mapHeaderNames(String[] headers) {
-        for (int i = 0; i < headers.length; i++) {
-            headers[i] = mapHeaderName(headers[i]);
-        }
-        return headers;
-    }
-
-    private String mapHeaderName(String header) {
-        StringBuilder sb = new StringBuilder(header.length());
-
-        char[] chars = header.toCharArray();
-
-        boolean nextUpperCase = false;
-        for (int i = 0; i < chars.length; i++) {
-            char c = chars[i];
-            if (Character.isWhitespace(c) || c == '_') {
-                nextUpperCase = true;
-                continue;
-            } else {
-                sb.append(nextUpperCase ? Character.toUpperCase(c) : c);
-            }
-            nextUpperCase = false;
-        }
-
-        return sb.toString();
-    }
+public interface DataReader<T> {
+    List<T> read(InputStream is)
+            throws Exception;
 }

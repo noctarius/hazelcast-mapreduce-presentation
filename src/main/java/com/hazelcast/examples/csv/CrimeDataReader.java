@@ -26,7 +26,7 @@ import org.supercsv.exception.SuperCsvCellProcessorException;
 import org.supercsv.util.CsvContext;
 
 public class CrimeDataReader
-        extends DataReader<Crime> {
+        extends AbstractDataReader<Crime> {
 
     public CrimeDataReader() {
         super(new CellProcessor[]{ //

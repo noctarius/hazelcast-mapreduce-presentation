@@ -21,7 +21,7 @@ import org.supercsv.cellprocessor.Optional;
 import org.supercsv.cellprocessor.ift.CellProcessor;
 
 public class StateDataReader
-        extends DataReader<State> {
+        extends AbstractDataReader<State> {
 
     public StateDataReader() {
         super(new CellProcessor[]{ //

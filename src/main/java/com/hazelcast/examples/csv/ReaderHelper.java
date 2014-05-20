@@ -21,6 +21,7 @@ import com.hazelcast.core.IList;
 import com.hazelcast.core.IMap;
 import com.hazelcast.examples.model.Crime;
 import com.hazelcast.examples.model.Person;
+import com.hazelcast.examples.model.SalaryYear;
 import com.hazelcast.examples.model.State;
 
 import java.io.InputStream;
@@ -39,6 +40,7 @@ public final class ReaderHelper {
         readStates(hazelcastInstance);
         readPeople(hazelcastInstance);
         readCrimes(hazelcastInstance);
+        readSalary(hazelcastInstance);
     }
 
     private static void readStates(HazelcastInstance hazelcastInstance)
@@ -62,6 +64,19 @@ public final class ReaderHelper {
             IList<Person> personsList = hazelcastInstance.getList("persons");
             List<Person> persons = personDataReader.read(is);
             personsList.addAll(persons);
+        }
+    }
+
+    private static void readSalary(HazelcastInstance hazelcastInstance)
+            throws Exception {
+
+        SalaryDataReader salaryDataReader = new SalaryDataReader();
+        try (InputStream is = CLASS_LOADER.getResourceAsStream("salary.csv")) {
+            IMap<String, SalaryYear> salariesMap = hazelcastInstance.getMap("salaries");
+            List<SalaryYear> salaries = salaryDataReader.read(is);
+            for (SalaryYear salary : salaries) {
+                salariesMap.put(salary.getEmail(), salary);
+            }
         }
     }
 

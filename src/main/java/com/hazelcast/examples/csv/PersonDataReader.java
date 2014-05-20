@@ -20,7 +20,7 @@ import com.hazelcast.examples.model.Person;
 import org.supercsv.cellprocessor.ift.CellProcessor;
 
 public class PersonDataReader
-        extends DataReader<Person> {
+        extends AbstractDataReader<Person> {
 
     public PersonDataReader() {
         super(new CellProcessor[]{ //
