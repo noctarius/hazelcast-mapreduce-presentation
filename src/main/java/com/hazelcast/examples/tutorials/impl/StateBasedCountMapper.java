@@ -35,7 +35,7 @@ public class StateBasedCountMapper
     private static final Integer ONE = Integer.valueOf(1);
 
     private String state;
-    private HazelcastInstance hazelcastInstance;
+    private transient HazelcastInstance hazelcastInstance;
 
     private final Map<String, String> abbrevationMapping = new HashMap<>(50);
 

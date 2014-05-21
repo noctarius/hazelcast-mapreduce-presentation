@@ -42,7 +42,7 @@ public class Main {
         ReaderHelper.read(hazelcastInstance);
 
         // Execute Tutorial
-        Tutorial tutorial = new Tutorial5();
+        Tutorial tutorial = new Tutorial1();
         tutorial.execute(hazelcastInstance);
 
         // Shutdown cluster

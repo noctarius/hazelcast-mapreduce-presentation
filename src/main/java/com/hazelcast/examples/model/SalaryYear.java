@@ -55,6 +55,14 @@ public class SalaryYear
         this.months = months;
     }
 
+    public int getAnualSalary() {
+        int sum = 0;
+        for (SalaryMonth salaryMonth : getMonths()) {
+            sum += salaryMonth.getSalary();
+        }
+        return sum;
+    }
+
     @Override
     public void writeData(ObjectDataOutput out)
             throws IOException {
