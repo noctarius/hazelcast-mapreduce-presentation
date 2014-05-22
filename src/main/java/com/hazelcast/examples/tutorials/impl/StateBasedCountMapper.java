@@ -18,7 +18,6 @@ package com.hazelcast.examples.tutorials.impl;
 
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.HazelcastInstanceAware;
-import com.hazelcast.core.IList;
 import com.hazelcast.core.IMap;
 import com.hazelcast.examples.model.Person;
 import com.hazelcast.examples.model.State;

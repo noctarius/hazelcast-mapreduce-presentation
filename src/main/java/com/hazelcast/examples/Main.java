@@ -21,7 +21,7 @@ import com.hazelcast.config.NetworkConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.examples.csv.ReaderHelper;
-import com.hazelcast.examples.tutorials.*;
+import com.hazelcast.examples.tutorials.Tutorial2;
 
 import java.util.Arrays;
 
@@ -36,17 +36,20 @@ public class Main {
             throws Exception {
 
         // Prepare Hazelcast cluster
-        HazelcastInstance hazelcastInstance = buildCluster(1);
+        HazelcastInstance hazelcastInstance = buildCluster(3);
 
         // Read CSV data
         ReaderHelper.read(hazelcastInstance);
 
-        // Execute Tutorial
-        Tutorial tutorial = new Tutorial1();
-        tutorial.execute(hazelcastInstance);
+        try {
+            // Execute Tutorial
+            Tutorial tutorial = new Tutorial2();
+            tutorial.execute(hazelcastInstance);
 
-        // Shutdown cluster
-        Hazelcast.shutdownAll();
+        } finally {
+            // Shutdown cluster
+            Hazelcast.shutdownAll();
+        }
     }
 
     private static HazelcastInstance buildCluster(int memberCount) {

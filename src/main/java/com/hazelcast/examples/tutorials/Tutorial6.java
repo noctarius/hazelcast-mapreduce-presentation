@@ -17,7 +17,6 @@
 package com.hazelcast.examples.tutorials;
 
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.ICompletableFuture;
 import com.hazelcast.core.IMap;
 import com.hazelcast.examples.Tutorial;
 import com.hazelcast.examples.model.SalaryYear;
@@ -26,6 +25,7 @@ import com.hazelcast.examples.tutorials.impl.SalarySumMapper;
 import com.hazelcast.examples.tutorials.impl.SalarySumReducerFactory;
 import com.hazelcast.mapreduce.Collator;
 import com.hazelcast.mapreduce.Job;
+import com.hazelcast.mapreduce.JobCompletableFuture;
 import com.hazelcast.mapreduce.JobTracker;
 import com.hazelcast.mapreduce.KeyValueSource;
 
@@ -45,7 +45,7 @@ public class Tutorial6
 
         Job<String, SalaryYear> job = jobTracker.newJob(source);
 
-        ICompletableFuture<Integer> future = job //
+        JobCompletableFuture<Integer> future = job //
                 .mapper(new SalarySumMapper()) //
                 .combiner(new SalarySumCombinerFactory()) //
                 .reducer(new SalarySumReducerFactory()) //

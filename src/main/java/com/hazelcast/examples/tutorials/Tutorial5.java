@@ -53,9 +53,9 @@ public class Tutorial5
 
         ICompletableFuture<List<Map.Entry<String, Integer>>> future = //
                 job.mapper(new SalaryMapper()) //
-                .combiner(new SalaryCombinerFactory()) //
-                .reducer(new SalaryReducerFactory()) //
-                .submit(new SalaryCollator());
+                        .combiner(new SalaryCombinerFactory()) //
+                        .reducer(new SalaryReducerFactory()) //
+                        .submit(new SalaryCollator());
 
         // Intermediate result
         List<Map.Entry<String, Integer>> orderedSalariesByState = future.get();
@@ -68,8 +68,8 @@ public class Tutorial5
 
         ICompletableFuture<Map<CrimeCategory, Integer>> crimeFuture = //
                 crimeJob.mapper(new CrimeMapper(topSalary.getKey())) //
-                .reducer(new CrimeReducerFactory()) //
-                .submit();
+                        .reducer(new CrimeReducerFactory()) //
+                        .submit();
 
         System.out.println(ToStringPrettyfier.toString(crimeFuture.get()));
     }
