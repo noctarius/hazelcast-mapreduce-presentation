@@ -23,18 +23,18 @@ public class SalaryCombinerFactory
         implements CombinerFactory<String, Integer, SalaryTuple> {
 
     @Override
-    public Combiner<String, Integer, SalaryTuple> newCombiner(String key) {
+    public Combiner<Integer, SalaryTuple> newCombiner(String key) {
         return new SalaryCombiner();
     }
 
     private static class SalaryCombiner
-            extends Combiner<String, Integer, SalaryTuple> {
+            extends Combiner<Integer, SalaryTuple> {
 
         private int count;
         private int amount;
 
         @Override
-        public void combine(String key, Integer value) {
+        public void combine(Integer value) {
             count++;
             amount += value;
         }

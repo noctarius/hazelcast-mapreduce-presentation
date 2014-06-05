@@ -23,17 +23,17 @@ public class CountCombinerFactory
         implements CombinerFactory<String, Integer, Integer> {
 
     @Override
-    public Combiner<String, Integer, Integer> newCombiner(String key) {
+    public Combiner<Integer, Integer> newCombiner(String key) {
         return new CountCombiner();
     }
 
     private static class CountCombiner
-            extends Combiner<String, Integer, Integer> {
+            extends Combiner<Integer, Integer> {
 
         private int count;
 
         @Override
-        public void combine(String key, Integer value) {
+        public void combine(Integer value) {
             count += value;
         }
 

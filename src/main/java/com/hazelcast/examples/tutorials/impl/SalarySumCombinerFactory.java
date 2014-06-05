@@ -23,17 +23,17 @@ public class SalarySumCombinerFactory
         implements CombinerFactory<String, Integer, Integer> {
 
     @Override
-    public Combiner<String, Integer, Integer> newCombiner(String key) {
+    public Combiner<Integer, Integer> newCombiner(String key) {
         return new SalarySumCombiner();
     }
 
     private static class SalarySumCombiner
-            extends Combiner<String, Integer, Integer> {
+            extends Combiner<Integer, Integer> {
 
         private volatile int sum;
 
         @Override
-        public void combine(String key, Integer value) {
+        public void combine(Integer value) {
             sum += value;
         }
 

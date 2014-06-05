@@ -22,6 +22,7 @@ import com.hazelcast.core.IList;
 import com.hazelcast.examples.Tutorial;
 import com.hazelcast.examples.model.Person;
 import com.hazelcast.examples.tutorials.impl.PersonMapper;
+import com.hazelcast.examples.tutorials.impl.ToStringPrettyfier;
 import com.hazelcast.mapreduce.Job;
 import com.hazelcast.mapreduce.JobTracker;
 import com.hazelcast.mapreduce.KeyValueSource;
@@ -43,6 +44,6 @@ public class Tutorial1
         // Find all people named James
         ICompletableFuture future = job.mapper(new PersonMapper("James")).submit();
 
-        System.out.println(future.get());
+        System.out.println(ToStringPrettyfier.toString(future.get()));
     }
 }

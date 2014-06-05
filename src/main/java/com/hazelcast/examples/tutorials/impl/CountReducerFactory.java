@@ -23,12 +23,12 @@ public class CountReducerFactory
         implements ReducerFactory<String, Integer, Integer> {
 
     @Override
-    public Reducer<String, Integer, Integer> newReducer(String key) {
+    public Reducer<Integer, Integer> newReducer(String key) {
         return new CountReducer();
     }
 
     private static class CountReducer
-            extends Reducer<String, Integer, Integer> {
+            extends Reducer<Integer, Integer> {
 
         private volatile int count;
 

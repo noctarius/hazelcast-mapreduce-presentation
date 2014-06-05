@@ -25,6 +25,6 @@ public class SalarySumMapper
 
     @Override
     public void map(String key, SalaryYear value, Context<String, Integer> context) {
-        context.emit("sum", value.getAnualSalary());
+        context.emit("sum", value.getAnnualSalary());
     }
 }

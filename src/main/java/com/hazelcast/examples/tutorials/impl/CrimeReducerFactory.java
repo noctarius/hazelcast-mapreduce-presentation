@@ -23,12 +23,12 @@ public class CrimeReducerFactory
         implements com.hazelcast.mapreduce.ReducerFactory<CrimeCategory, Integer, Integer> {
 
     @Override
-    public Reducer<CrimeCategory, Integer, Integer> newReducer(CrimeCategory key) {
+    public Reducer<Integer, Integer> newReducer(CrimeCategory key) {
         return new CrimeReducer();
     }
 
     private static class CrimeReducer
-            extends Reducer<CrimeCategory, Integer, Integer> {
+            extends Reducer<Integer, Integer> {
 
         private volatile int count;
 

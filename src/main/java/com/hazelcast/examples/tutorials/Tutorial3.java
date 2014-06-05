@@ -44,14 +44,14 @@ public class Tutorial3
         Job<String, Person> job = jobTracker.newJob(source);
 
         // Collect all people by state
-        // ICompletableFuture future = job.mapper(new StateBasedCountMapper()).submit();
+        ICompletableFuture future = job.mapper(new StateBasedCountMapper()).submit();
 
         // Count people by state
         // ICompletableFuture future = job.mapper(new StateBasedCountMapper()).reducer(new CountReducerFactory()).submit();
 
         // Same as above but with precalculation per node
-        ICompletableFuture future = job.mapper(new StateBasedCountMapper()).combiner(new CountCombinerFactory())
-                                       .reducer(new CountReducerFactory()).submit();
+        // ICompletableFuture future = job.mapper(new StateBasedCountMapper()).combiner(new CountCombinerFactory())
+        //                                .reducer(new CountReducerFactory()).submit();
 
         System.out.println(ToStringPrettyfier.toString(future.get()));
     }

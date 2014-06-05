@@ -42,10 +42,10 @@ public class Tutorial2
         Job<String, Person> job = jobTracker.newJob(source);
 
         // Find all people grouped by state
-        //ICompletableFuture future = job.mapper(new StateBasedMapper()).submit();
+        ICompletableFuture future = job.mapper(new StateBasedMapper()).submit();
 
         // Find all people for the given state
-        ICompletableFuture future = job.mapper(new StateBasedMapper("CA")).submit();
+        // ICompletableFuture future = job.mapper(new StateBasedMapper("CA")).submit();
 
         System.out.println(ToStringPrettyfier.toString(future.get()));
     }

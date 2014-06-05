@@ -21,7 +21,7 @@ import com.hazelcast.config.NetworkConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.examples.csv.ReaderHelper;
-import com.hazelcast.examples.tutorials.Tutorial2;
+import com.hazelcast.examples.tutorials.*;
 
 import java.util.Arrays;
 
@@ -43,7 +43,13 @@ public class Main {
 
         try {
             // Execute Tutorial
-            Tutorial tutorial = new Tutorial2();
+            Tutorial tutorial = new Tutorial1();
+            // Tutorial tutorial = new Tutorial2();
+            // Tutorial tutorial = new Tutorial3();
+            // Tutorial tutorial = new Tutorial4();
+            // Tutorial tutorial = new Tutorial5();
+            // Tutorial tutorial = new Tutorial6();
+            // Tutorial tutorial = new Tutorial7();
             tutorial.execute(hazelcastInstance);
 
         } finally {

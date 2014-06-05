@@ -23,12 +23,12 @@ public class SalaryReducerFactory
         implements ReducerFactory<String, SalaryTuple, Integer> {
 
     @Override
-    public Reducer<String, SalaryTuple, Integer> newReducer(String key) {
+    public Reducer<SalaryTuple, Integer> newReducer(String key) {
         return new SalaryReducer();
     }
 
     private static class SalaryReducer
-            extends Reducer<String, SalaryTuple, Integer> {
+            extends Reducer<SalaryTuple, Integer> {
 
         private volatile int count;
         private volatile int amount;
