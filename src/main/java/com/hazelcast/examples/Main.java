@@ -36,7 +36,7 @@ public class Main {
             throws Exception {
 
         // Prepare Hazelcast cluster
-        HazelcastInstance hazelcastInstance = buildCluster(3);
+        HazelcastInstance hazelcastInstance = buildCluster(2);
 
         // Read CSV data
         ReaderHelper.read(hazelcastInstance);

@@ -31,7 +31,9 @@ public class Tutorial7
             throws Exception {
 
         IMap<String, SalaryYear> map = hazelcastInstance.getMap("salaries");
-        Supplier<String, SalaryYear, Integer> supplier = Supplier.all((entry) -> entry.getAnnualSalary());
+        Supplier<String, SalaryYear, Integer> supplier =
+                Supplier.all((entry) -> entry.getAnnualSalary());
+
         int sum = map.aggregate(supplier, Aggregations.integerSum());
         System.out.println("Salary sum: " + sum);
     }
