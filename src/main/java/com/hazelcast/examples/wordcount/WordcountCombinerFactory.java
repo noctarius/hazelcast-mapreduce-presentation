@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hazelcast.examples.wordcount0;
+package com.hazelcast.examples.wordcount;
 
 import com.hazelcast.mapreduce.Combiner;
 import com.hazelcast.mapreduce.CombinerFactory;
@@ -39,7 +39,7 @@ public class WordcountCombinerFactory
 
         @Override
         public Integer finalizeChunk() {
-            return count;
+            return count == 0 ? null : count;
         }
 
         @Override

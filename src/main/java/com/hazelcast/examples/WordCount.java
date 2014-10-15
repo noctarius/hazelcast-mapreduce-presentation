@@ -23,9 +23,9 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.ICompletableFuture;
 import com.hazelcast.core.IMap;
 import com.hazelcast.examples.tutorials.impl.ToStringPrettyfier;
-import com.hazelcast.examples.wordcount0.TokenizerMapper;
-import com.hazelcast.examples.wordcount0.WordcountCombinerFactory;
-import com.hazelcast.examples.wordcount0.WordcountReducerFactory;
+import com.hazelcast.examples.wordcount.TokenizerMapper;
+import com.hazelcast.examples.wordcount.WordcountCombinerFactory;
+import com.hazelcast.examples.wordcount.WordcountReducerFactory;
 import com.hazelcast.mapreduce.Job;
 import com.hazelcast.mapreduce.JobTracker;
 import com.hazelcast.mapreduce.KeyValueSource;
@@ -53,19 +53,20 @@ public class WordCount {
             // Read data
             fillMapWithData(hazelcastInstance);
 
-            JobTracker jobTracker = hazelcastInstance.getJobTracker("default");
+            JobTracker tracker = hazelcastInstance.getJobTracker("default");
 
-            IMap<String, String> articles = hazelcastInstance.getMap(MAP_NAME);
+            IMap<String, String> map = hazelcastInstance.getMap(MAP_NAME);
+            KeyValueSource<String, String> source = KeyValueSource.fromMap(map);
 
-            KeyValueSource<String, String> source = KeyValueSource.fromMap(articles);
+            Job<String, String> job = tracker.newJob(source);
+            ICompletableFuture<Map<String, Integer>> future = job
+                    .mapper(new TokenizerMapper())
+                    // Activate Combiner to add combining phase!
+                    // .combiner(new WordcountCombinerFactory())
+                    .reducer(new WordcountReducerFactory())
+                    .submit();
 
-            Job<String, String> job = jobTracker.newJob(source);
 
-            ICompletableFuture<Map<String, Integer>> future =
-                    job.mapper(new TokenizerMapper())
-                       .combiner(new WordcountCombinerFactory())
-                       .reducer(new WordcountReducerFactory())
-                       .submit();
 
             System.out.println(ToStringPrettyfier.toString(future.get()));
 

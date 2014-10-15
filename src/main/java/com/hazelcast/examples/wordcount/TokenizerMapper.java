@@ -14,32 +14,25 @@
  * limitations under the License.
  */
 
-package com.hazelcast.examples.wordcount0;
+package com.hazelcast.examples.wordcount;
 
-import com.hazelcast.mapreduce.Reducer;
-import com.hazelcast.mapreduce.ReducerFactory;
+import com.hazelcast.examples.WordCount;
+import com.hazelcast.mapreduce.Context;
+import com.hazelcast.mapreduce.Mapper;
 
-public class WordcountReducerFactory
-        implements ReducerFactory<String, Integer, Integer> {
+import java.util.StringTokenizer;
+
+public class TokenizerMapper
+        implements Mapper<String, String, String, Integer> {
+
+    private static final Integer ONE = Integer.valueOf(1);
 
     @Override
-    public Reducer<Integer, Integer> newReducer(String key) {
-        return new WordcountReducer();
-    }
-
-    private static class WordcountReducer
-            extends Reducer<Integer, Integer> {
-
-        private volatile int count;
-
-        @Override
-        public void reduce(Integer value) {
-            count += value;
-        }
-
-        @Override
-        public Integer finalizeReduce() {
-            return count;
+    public void map(String key, String value, Context<String, Integer> context) {
+        StringTokenizer tokenizer = new StringTokenizer(value);
+        while (tokenizer.hasMoreTokens()) {
+            String word = WordCount.cleanWord(tokenizer.nextToken());
+            context.emit(word.toLowerCase(), ONE);
         }
     }
 }
